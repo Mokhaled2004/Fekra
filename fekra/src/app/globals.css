@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-fekra-yellow: #ffcc00;
+  --color-fekra-dark: #0b0f19;
+  --color-fekra-card: #161e2e;
+  --color-fekra-muted: #9ca3af;
+  --font-russo: var(--font-russo);
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
