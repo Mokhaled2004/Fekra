@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import { Swords, Sparkles } from "lucide-react";
 import gsap from "gsap";
 
@@ -12,10 +11,23 @@ export default function SplashScreen({
 }) {
   const [isFadingOut, setIsFadingOut] = useState(false);
 
-  const card1Ref = useRef(null);
-  const card2Ref = useRef(null);
-  const card3Ref = useRef(null);
-  const logoRef = useRef(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+
+  // 1. High-priority explicit asset preloading instruction sent to the browser DOM
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = "/FekraSplashScreen.png";
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,16 +54,23 @@ export default function SplashScreen({
     const shiftX = isMobile ? 35 : 55;
     const shiftXSub = isMobile ? 25 : 40;
 
-    // 1. Entrance animation for the title image asset
+    // 2. Premium deceleration curve for a cinematic image fade-in
     if (logo) {
       gsap.fromTo(
         logo,
-        { opacity: 0, scale: 0.92, y: 10 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        { opacity: 0, scale: 0.94, y: 15 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1.1, // Increased timeline duration for smooth visual accommodation
+          ease: "power2.out", // Smooth exponential deceleration curve
+          force3D: true, // Locks hardware processing blocks down to suppress stutters
+        },
       );
     }
 
-    // 2. Loop animation for the flashcard deck shuffling
+    // 3. Loop animation for the flashcard deck shuffling
     const tl = gsap.timeline({
       repeat: -1,
       defaults: { ease: "power2.inOut" },
@@ -274,17 +293,17 @@ export default function SplashScreen({
         </div>
       </div>
 
-      {/* Image Container setup with responsive sizing boundaries */}
+      {/* 4. Optimized image block initialized with hard-coded opacity-0 to eliminate sudden pops */}
       <div
         ref={logoRef}
-        className="relative z-10 flex flex-col items-center select-none opacity-0 max-w-full px-2"
+        style={{ opacity: 0 }}
+        className="relative z-10 flex flex-col items-center select-none max-w-full px-2 will-change-transform"
       >
-        <Image
+        <img
           src="/FekraSplashScreen.png"
           alt="Fekra Anatomy Battle Title"
-          width={450}
-          height={150}
-          priority
+          loading="eager"
+          decoding="sync"
           className="h-auto w-full max-w-[280px] sm:max-w-md object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.02)]"
         />
       </div>
