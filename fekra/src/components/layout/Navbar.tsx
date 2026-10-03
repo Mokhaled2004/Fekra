@@ -14,12 +14,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main flex row acting as the anchor grid for desktop positioning layout */}
           <div className="relative flex items-center justify-between h-20 w-full">
-            {/* Left: Desktop Logo wrapper */}
+            {/* Left: Desktop Logo wrapper swapped to .webp asset */}
             <div className="hidden md:flex items-center">
               <Link href="/" className="flex items-center group">
                 <div className="relative w-44 h-16 flex items-center">
                   <Image
-                    src="/FekraLogo.png"
+                    src="/FekraLogo.webp"
                     alt="FEKRA Anatomy Battle Logo"
                     fill
                     className="object-contain object-left transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-1"
@@ -29,11 +29,11 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile View: Centered Logo Placement */}
+            {/* Mobile View: Centered Logo Placement swapped to .webp asset */}
             <div className="flex md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-14 items-center justify-center pointer-events-auto">
               <Link href="/" className="relative w-full h-full">
                 <Image
-                  src="/FekraLogo.png"
+                  src="/FekraLogo.webp"
                   alt="FEKRA Anatomy Battle Logo"
                   fill
                   className="object-contain object-center"

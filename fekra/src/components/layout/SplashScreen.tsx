@@ -16,12 +16,12 @@ export default function SplashScreen({
   const card3Ref = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
-  // 1. High-priority explicit asset preloading instruction sent to the browser DOM
+  // 1. High-priority explicit webp asset preloading instruction sent to the browser DOM
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";
-    link.href = "/FekraSplashScreen.png";
+    link.href = "/FekraSplashScreen.webp";
     document.head.appendChild(link);
 
     return () => {
@@ -293,14 +293,14 @@ export default function SplashScreen({
         </div>
       </div>
 
-      {/* 4. Optimized image block initialized with hard-coded opacity-0 to eliminate sudden pops */}
+      {/* 4. Optimized webp image block initialized with hard-coded opacity-0 to eliminate sudden pops */}
       <div
         ref={logoRef}
         style={{ opacity: 0 }}
         className="relative z-10 flex flex-col items-center select-none max-w-full px-2 will-change-transform"
       >
         <img
-          src="/FekraSplashScreen.png"
+          src="/FekraSplashScreen.webp"
           alt="Fekra Anatomy Battle Title"
           loading="eager"
           decoding="sync"
